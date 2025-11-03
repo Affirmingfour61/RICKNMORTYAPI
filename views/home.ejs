@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("partials/head.ejs") %>
+    <title>WELCOME TO THE RICK AND MORTY PAGE!</title>
+</head>
+<body class="text-center">
+    <div class="overlay">
+        <%- include("partials/nav.ejs") %>
+
+        <main class="container py-5">
+            <h1>Meet This Random Character!</h1>
+            <%- include("partials/characterCard.ejs") %>
+        </main>
+    </div>
+
+    <%- include("partials/foot.ejs") %>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("partials/head.ejs") %>
+    <title>Faker Character</title>
+</head>
+<body class="text-center">
+    <div class="overlay">
+        <%- include("partials/nav.ejs") %>
+
+        <main class="container py-5">
+            <h1>Random Fake Character</h1>
+
+            <% if(character) { %>
+                <div class="character-card mt-3">
+                    <img src="<%= character.avatar %>" alt="<%= character.name %>" style="width: 400px;  height:500;">
+                    <h2><%= character.name %></h2>
+                    <p>Email: <%= character.email %></p>
+                    <p>Job: <%= character.job %></p>
+                    <p>City: <%= character.city %></p>
+                </div>
+            <% } %>
+        </main>
+    </div>
+
+    <%- include("partials/foot.ejs") %>
+</body>
+</html>

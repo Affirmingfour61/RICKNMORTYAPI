@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("partials/head.ejs") %>
+    <title>Search Rick and Morty Characters</title>
+</head>
+<body class="text-center">
+
+    <%- include("partials/nav.ejs") %>
+
+    <main class="container py-5">
+        <h1 class="mb-4">Search Characters by Name</h1>
+
+        <!-- Search Form -->
+        <form id="searchForm" action="/search" method="POST" class="mb-4 mx-auto" style="max-width: 300px;">
+            <input 
+                type="text" 
+                name="name" 
+                placeholder="Enter character name" 
+                class="form-control mb-3" 
+                required
+            >
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+        </form>
+
+        <!-- Recommended Characters -->
+        <section class="mb-4">
+            <p>Try searching for:</p>
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+                <button type="button" class="btn btn-secondary btn-sm" data-name="Rick Sanchez">Rick Sanchez</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-name="Morty Smith">Morty Smith</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-name="Summer Smith">Summer Smith</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-name="Beth Smith">Beth Smith</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-name="Jerry Smith">Jerry Smith</button>
+            </div>
+        </section>
+
+        <!-- Search Results -->
+        <% if (characters) { %>
+            <div class="row justify-content-center">
+                <% characters.forEach(c => { %>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card h-100 p-2 shadow-sm">
+                            <img src="<%= c.image %>" class="card-img-top" alt="<%= c.name %>">
+                            <div class="card-body text-center">
+                                <h5 class="card-title"><%= c.name %></h5>
+                                <p class="card-text mb-1">Status: <%= c.status %></p>
+                                <p class="card-text">Species: <%= c.species %></p>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } %>
+
+        <% if (error) { %>
+            <p class="text-danger mt-3"><%= error %></p>
+        <% } %>
+    </main>
+
+    <%- include("partials/foot.ejs") %>
+
+    <!-- Script to handle recommended buttons -->
+    <script>
+        document.querySelectorAll('[data-name]').forEach(button => {
+            button.addEventListener('click', () => {
+                const nameInput = document.querySelector('input[name="name"]');
+                nameInput.value = button.dataset.name;
+                document.getElementById('searchForm').submit();
+            });
+        });
+    </script>
+
+</body>
+</html>
